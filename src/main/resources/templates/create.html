@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Home page</title>
+  <style>
+    .pad_top {
+      float: left;
+      width: 100px;
+    }
+
+    form {
+      display: inline-block;
+      padding: 10px;
+      /*border: 1px solid black;*/
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="submit"], #view {
+      margin: 0;
+      margin-top: 20px;
+      height: 30px;
+      display: inline;
+      background-color: #1879e0;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px 10px;
+      color: white;
+      box-shadow: none;
+      border: none;
+    }
+
+    input[type="submit"]:hover, #view:hover {
+      background-color: #085db2;
+    }
+
+    /*#view {*/
+    /*  display: block;*/
+    /*  height: 30px;*/
+    /*  width: 100px;*/
+    /*  background-color: #1879e0;*/
+    /*  text-align: center;*/
+    /*  border-radius: 5px;*/
+    /*  padding: 5px 10px;*/
+    /*}*/
+  </style>
+</head>
+<body>
+<h1>Product</h1>
+<p style="color: red; font-style: italic" th:text="${message}"></p>
+<form th:action="@{/product/create}" method="post">
+  <label class="pad_top">Product Code:</label>
+  <input type="text" name="productCode" th:value="${product?.productCode}"><br>
+  <label class="pad_top">Description:</label>
+  <input type="text" name="description" th:value="${product?.description}"><br>
+  <label class="pad_top">Price:</label>
+  <input type="text" name="price" th:value="${product?.price}"><br>
+
+  <input type="submit" value="Create Product" class="margin_left">
+</form>
+<div id="view">
+  <a href="/product/displayProducts"
+     style="text-decoration: none; color: white; display: inline">
+    View Products
+  </a>
+</div>
+</body>
+</html>

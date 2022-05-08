@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Home page</title>
+  <style>
+    .pad_top {
+      float: left;
+      width: 100px;
+    }
+
+    form {
+      display: inline-block;
+      padding: 10px;
+      /*border: 1px solid black;*/
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="submit"], #view {
+      margin: 0;
+      margin-top: 20px;
+      height: 30px;
+      display: inline;
+      background-color: #1879e0;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px 10px;
+      color: white;
+      box-shadow: none;
+      border: none;
+    }
+
+    input[type="submit"]:hover, #view:hover {
+      background-color: #085db2;
+    }
+  </style>
+</head>
+<body>
+<h1>Are you sure you want to delete this product?</h1>
+<label>Product code:</label>
+<span th:text="${product.productCode}"></span><br>
+<br><label>Description:</label>
+<span th:text="${product.description}"></span><br>
+<br><label>Price:</label>
+<span th:text="${product.price}"></span><br>
+<form th:action="@{/product/delete/__${product.productCode}__}" method="post">
+  <input type="submit" value="Yes" class="margin_left">
+</form>
+<div id="view">
+  <a href="/product/displayProducts"
+     style="text-decoration: none; color: white; display: inline">
+    No
+  </a>
+</div>
+</body>
+</html>
