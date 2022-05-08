@@ -28,4 +28,19 @@ public class ProductController {
         model.addAttribute("products", products);
         return "viewProducts";
     }
+
+    @GetMapping("/delete/{productCode}")
+    public String delete(@PathVariable String productCode, Model model){
+        Product product = productRepository.findByProductCode(productCode);
+        model.addAttribute("product", product);
+        return "delete";
+    }
+
+    @PostMapping("/delete/{productCode}")
+    public String deleteProduct(@PathVariable String productCode){
+        System.out.println("productCode: " + productCode);
+        Product product = productRepository.findByProductCode(productCode);
+        productRepository.delete(product);
+        return "redirect:/product/displayProducts";
+    }
 }
