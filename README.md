@@ -7,4 +7,4 @@ Thành viên nhóm 7:
 Phân chia công việc từng thành viên:
 + Quân: Tạo project, tạo entity, tính năng thêm mới sản phẩm
 + Phúc: Tạo tính năng cập nhật sản phẩm
-+ Dũng: Tạo tính năng sửa sản phẩm
++ Dũng: Tạo tính năng xóa sản phẩm
