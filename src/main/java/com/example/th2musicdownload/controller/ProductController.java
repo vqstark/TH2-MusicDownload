@@ -81,4 +81,44 @@ public class ProductController {
         productRepository.delete(product);
         return "redirect:/product/displayProducts";
     }
+    @GetMapping("/update/{productCode}")
+    public String loadPageUpdate(@PathVariable String productCode, Model model) {
+        Product product = productRepository.findByProductCode(productCode);
+        model.addAttribute("product", product);
+        return "update";
+    }
+
+    @PostMapping(value = "/update", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String updateProduct(@RequestParam String productCode,
+                                @RequestParam String description,
+                                @RequestParam String price, RedirectAttributes model) {
+        String message = "";
+        Double price1 = 0d;
+        try{
+            price1 = Double.parseDouble(price);
+        }catch(NumberFormatException e){
+            message = "You must enter correct format of the price";
+            model.addFlashAttribute("message", message);
+            return "redirect:/product/update/" + productCode;
+        }
+        Product product = new Product(productCode, description, price1);
+        model.addAttribute("product", product);
+        if(productCode==null || productCode.length()==0){
+            message = "You must enter product code for product";
+            model.addAttribute("message", message);
+            return "update";
+        }
+        if(description==null || description.length()==0){
+            message = "You must enter description for product";
+            model.addAttribute("message", message);
+            return "update";
+        }
+        if(price==null || price.length()==0){
+            message = "You must enter price for product";
+            model.addAttribute("message", message);
+            return "update";
+        }
+        productRepository.updateByCode(productCode, description, Double.parseDouble(price));
+        return "redirect:/product/displayProducts";
+    }
 }
